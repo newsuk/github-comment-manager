@@ -1,0 +1,19 @@
+# vscode
+.vscode
+
+# node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# build
+lib
+
+# test
+.nyc_output
+coverage
+
+# other
+.DS_Store
+CHANGELOG.md
+package-lock.json

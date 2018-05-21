@@ -1,0 +1,70 @@
+{
+	"name": "github-comment-manager",
+	"version": "1.0.0",
+	"description": "Github commenting made eas",
+	"main": "lib/index.js",
+	"dependencies": {
+		"apollo-fetch": "^0.7.0",
+		"request": "^2.87.0"
+	},
+	"devDependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-core": "^6.26.3",
+		"babel-preset-env": "^1.7.0",
+		"chai": "^4.1.2",
+		"eslint": "^4.19.1",
+		"eslint-config-airbnb-base": "^12.1.0",
+		"eslint-config-prettier": "^2.9.0",
+		"eslint-plugin-chai-friendly": "^0.4.1",
+		"eslint-plugin-import": "^2.12.0",
+		"eslint-plugin-mocha": "^5.0.0",
+		"eslint-plugin-prettier": "^2.6.0",
+		"lerna": "^2.11.0",
+		"lint-staged": "^7.1.2",
+		"mocha": "^5.2.0",
+		"nyc": "^11.8.0",
+		"pre-commit": "^1.2.2",
+		"prettier": "^1.12.1",
+		"sinon": "^5.0.7",
+		"sinon-chai": "^3.0.0"
+	},
+	"scripts": {
+		"build": "babel src -d lib --copy-files",
+		"lint": "./node_modules/.bin/eslint src/* --fix",
+		"lint-staged": "lint-staged",
+		"test": "nyc mocha -r chai/register-should --require babel-core/register './src/**/*.test.js'",
+		"prepare": "npm run build",
+		"precommit-msg": "echo 'Pre-commit checks...' && exit 0"
+	},
+	"lint-staged": {
+		"src/**/*.js": [
+			"lint",
+			"git add"
+		]
+	},
+	"pre-commit": [
+		"precommit-msg",
+		"lint-staged"
+	],
+	"nyc": {
+		"include": [
+			"src/**/*.js"
+		],
+		"exclude": [
+			"src/**/*.test.js"
+		],
+		"sourceMap": true,
+		"instrument": true,
+		"require": [
+			"babel-register"
+		],
+		"all": true,
+		"reporter": [
+			"html",
+			"text-summary"
+		]
+	},
+	"keywords": [],
+	"author": "News UK & Ireland Ltd",
+	"license": "BSD-3-Clause"
+}
