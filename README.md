@@ -43,7 +43,7 @@ update.comment({account, token, repository, commentId, updatedComment});
 | -------------- | ----------------------------------------- |
 | account        | Github account username                   |
 | token          | Github account access token               |
-| repository     | Repository to comment on                  |
+| repository     | Repository to update comment on           |
 | commentId      | Id of the comment to be updated           |
 | updatedComment | Text which the comment will be updated to |
 
@@ -57,12 +57,12 @@ import { remove } from 'github-comment-manager';
 remove.comment({account, token, repository, commentId});
 ```
 
-| Parameter      | Description                               |
-| -------------- | ----------------------------------------- |
-| account        | Github account username                   |
-| token          | Github account access token               |
-| repository     | Repository to comment on                  |
-| commentId      | Id of the comment to be updated           |
+| Parameter  | Description                       |
+| ---------- | --------------------------------- |
+| account    | Github account username           |
+| token      | Github account access token       |
+| repository | Repository to remove comment from |
+| commentId  | Id of the comment to be removed   |
 
 ### Contributing
 
