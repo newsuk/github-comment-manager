@@ -1,3 +1,4 @@
+import { promisify } from 'util';
 import request from 'request';
 
 const comment = ({ account, token, repository, comment, pullRequest }) =>
@@ -13,12 +14,15 @@ const comment = ({ account, token, repository, comment, pullRequest }) =>
       body: `{"body": "${comment}"}`
     };
 
-    request.post(postCommentOptions, (error, response, body) => {
-      const statusCodeString = `${response.statusCode}`;
-      if (!statusCodeString.startsWith('2')) reject(body);
-      if (error) reject(error);
-      resolve();
-    });
+    const post = promisify(request.post);
+
+    post(postCommentOptions)
+      .then(({ body, statusCode }) => {
+        const statusCodeString = `${statusCode}`;
+        if (!statusCodeString.startsWith('2')) reject(body);
+        resolve();
+      })
+      .catch(reject);
   });
 
 export default {
