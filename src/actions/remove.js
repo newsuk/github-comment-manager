@@ -3,7 +3,7 @@ import request from 'request';
 
 const comment = ({ account, token, repository, commentId }) =>
   new Promise((resolve, reject) => {
-    const deleteCommentOptions = {
+    const removeCommentOptions = {
       url: `https://api.github.com/repos/${account}/${repository}/issues/comments/${commentId}`,
       headers: {
         Authorization: `Basic ${new Buffer(`${account}:${token}`).toString(
@@ -13,9 +13,9 @@ const comment = ({ account, token, repository, commentId }) =>
       }
     };
 
-    const deleteAction = promisify(request.delete);
+    const remove = promisify(request.delete);
 
-    deleteAction(deleteCommentOptions)
+    remove(removeCommentOptions)
       .then(({ body, statusCode }) => {
         if (isBadResult(statusCode)) throw body;
         return body;

@@ -3,7 +3,7 @@
 ## Overview
 
 The Github Comment Manager makes interacting with Github comments easier.
-This module exposes four functions allowing you to create, read, update and delete comments.
+This module exposes four functions allowing you to create, read, update and remove comments.
 
 ### Functions
 
@@ -47,9 +47,22 @@ update.comment({account, token, repository, commentId, updatedComment});
 | commentId      | Id of the comment to be updated           |
 | updatedComment | Text which the comment will be updated to |
 
-#### Delete
+#### Remove
 
-Usage to be defined.
+The remove function will remove a specific review comment on a Github pull request.
+
+```
+import { remove } from 'github-comment-manager';
+
+remove.comment({account, token, repository, commentId});
+```
+
+| Parameter      | Description                               |
+| -------------- | ----------------------------------------- |
+| account        | Github account username                   |
+| token          | Github account access token               |
+| repository     | Repository to comment on                  |
+| commentId      | Id of the comment to be updated           |
 
 ### Contributing
 
