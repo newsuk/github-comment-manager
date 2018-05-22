@@ -18,12 +18,14 @@ const comment = ({ account, token, repository, comment, pullRequest }) =>
 
     post(postCommentOptions)
       .then(({ body, statusCode }) => {
-        const statusCodeString = `${statusCode}`;
-        if (!statusCodeString.startsWith('2')) reject(body);
-        resolve();
+        if (isBadResult(statusCode)) throw body;
+        return body;
       })
+      .then(resolve)
       .catch(reject);
   });
+
+const isBadResult = code => !`${code}`.startsWith('2');
 
 export default {
   comment
