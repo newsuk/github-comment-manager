@@ -1,8 +1,9 @@
+import { promisify } from 'util';
 import request from 'request';
 
-const comment = ({ account, token, commentId, repository }) =>
+const comment = ({ account, token, repository, commentId }) =>
   new Promise((resolve, reject) => {
-    const deleteOptions = {
+    const deleteCommentOptions = {
       url: `https://api.github.com/repos/${account}/${repository}/issues/comments/${commentId}`,
       headers: {
         Authorization: `Basic ${new Buffer(`${account}:${token}`).toString(
@@ -12,11 +13,18 @@ const comment = ({ account, token, commentId, repository }) =>
       }
     };
 
-    request.delete(deleteOptions, error => {
-      if (error) reject(error);
-      resolve();
-    });
+    const deleteAction = promisify(request.delete);
+
+    deleteAction(deleteCommentOptions)
+      .then(({ body, statusCode }) => {
+        if (isBadResult(statusCode)) throw body;
+        return body;
+      })
+      .then(resolve)
+      .catch(reject);
   });
+
+const isBadResult = code => !`${code}`.startsWith('2');
 
 export default {
   comment
