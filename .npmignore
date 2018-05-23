@@ -2,3 +2,5 @@ coverage
 yarn-error.log
 *.test.js
 src
+CHANGELOG.md
+CONTRIBUTING.MD
