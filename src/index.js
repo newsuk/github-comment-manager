@@ -3,9 +3,7 @@ import readAction from './actions/read';
 import updateAction from './actions/update';
 import removeAction from './actions/remove';
 
-export default {
-  create: createAction,
-  read: readAction,
-  update: updateAction,
-  remove: removeAction
-};
+export const create = createAction;
+export const read = readAction;
+export const update = updateAction;
+export const remove = removeAction;
