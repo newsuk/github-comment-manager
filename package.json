@@ -26,6 +26,7 @@
 		"nyc": "^11.8.0",
 		"pre-commit": "^1.2.2",
 		"prettier": "^1.12.1",
+		"release-documentation-cli": "^1.4.1",
 		"sinon": "^5.0.7",
 		"sinon-chai": "^3.0.0"
 	},
@@ -35,7 +36,9 @@
 		"lint-staged": "lint-staged",
 		"test": "nyc mocha -r chai/register-should --require babel-core/register './src/**/*.test.js'",
 		"prepare": "npm run build",
-		"precommit-msg": "echo 'Pre-commit checks...' && exit 0"
+		"precommit-msg": "echo 'Pre-commit checks...' && exit 0",
+		"release:bump-version": "release bump-version",
+		"release:new": "release new --approved --scheduled --skipReleaseNotes"
 	},
 	"lint-staged": {
 		"src/**/*.js": [
