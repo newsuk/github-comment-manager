@@ -2,8 +2,8 @@ import sinon from 'sinon';
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
 import chaiAsPromised from 'chai-as-promised';
-import request from 'request';
 import remove from './remove';
+import githubApi from '../utilities/githubApi';
 
 chai.use(sinonChai);
 chai.use(chaiAsPromised);
@@ -25,45 +25,7 @@ describe('remove', () => {
       const repository = 'github-comment-manager';
       const commentId = 123456789;
 
-      const error = null;
-      const responseBody = 'success';
-      const response = { body: responseBody, statusCode: '200' };
-      const removeStub = sandbox
-        .stub(request, 'delete')
-        .callsArgWith(1, error, response, responseBody);
-
-      // Exercise.
-      await remove.comment({
-        account,
-        token,
-        repository,
-        commentId
-      });
-
-      // Verify.
-      removeStub.should.have.been.calledOnce;
-      removeStub.firstCall.args[0].url.should.equal(
-        `https://api.github.com/repos/${account}/${repository}/issues/comments/${commentId}`
-      );
-      removeStub.firstCall.args[0].headers.Authorization.should.equal(
-        'Basic dG9vbHM6c3VwZXItc2VjdXJlLXRva2Vu'
-      );
-      removeStub.firstCall.args[0].headers['User-Agent'].should.equal(account);
-    });
-
-    it('should reject with an error when a none 2xx status code is received', () => {
-      // Setup.
-      const account = 'tools';
-      const token = 'super-secure-token';
-      const repository = 'github-comment-manager';
-      const commentId = 123456789;
-
-      const error = null;
-      const responseBody = 'Not Found';
-      const response = { body: responseBody, statusCode: '404' };
-      sandbox
-        .stub(request, 'delete')
-        .callsArgWith(1, error, response, responseBody);
+      const apiStub = sandbox.stub(githubApi, 'remove').resolves();
 
       // Exercise.
       const removeAction = remove.comment({
@@ -74,7 +36,34 @@ describe('remove', () => {
       });
 
       // Verify.
-      return removeAction.should.have.rejectedWith(responseBody);
+      await removeAction.should.be.fulfilled;
+      apiStub.should.have.been.calledOnce;
+      apiStub.should.have.been.calledWith(
+        `/repos/${account}/${repository}/issues/comments/${commentId}`,
+        account,
+        token
+      );
+    });
+
+    it('should reject when there is an error', () => {
+      // Setup.
+      const account = 'tools';
+      const token = 'super-secure-token';
+      const repository = 'github-comment-manager';
+      const commentId = 123456789;
+
+      sandbox.stub(githubApi, 'remove').rejects();
+
+      // Exercise.
+      const removeAction = remove.comment({
+        account,
+        token,
+        repository,
+        commentId
+      });
+
+      // Verify.
+      return removeAction.should.have.rejected;
     });
   });
 });

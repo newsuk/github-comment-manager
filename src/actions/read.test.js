@@ -2,13 +2,13 @@ import sinon from 'sinon';
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
 import chaiAsPromised from 'chai-as-promised';
-import update from './update';
+import read from './read';
 import githubApi from '../utilities/githubApi';
 
 chai.use(sinonChai);
 chai.use(chaiAsPromised);
 
-describe('update', () => {
+describe('read', () => {
   let sandbox;
 
   beforeEach(() => {
@@ -18,33 +18,30 @@ describe('update', () => {
   afterEach(() => sandbox.restore());
 
   describe('comment', () => {
-    it('should update a comment', async () => {
+    it('should read the PR comments', async () => {
       // Setup.
       const account = 'tools';
       const token = 'super-secure-token';
       const repository = 'github-comment-manager';
-      const commentId = 123456789;
-      const updatedComment = 'I am an updated comment';
+      const pullRequest = 9000;
 
-      const apiStub = sandbox.stub(githubApi, 'patch').resolves();
+      const apiStub = sandbox.stub(githubApi, 'get').resolves();
 
       // Exercise.
-      const updateAction = update.comment({
+      const readAction = read.comments({
         account,
         token,
         repository,
-        commentId,
-        updatedComment
+        pullRequest
       });
 
       // Verify.
-      await updateAction.should.be.fulfilled;
+      await readAction.should.be.fulfilled;
       apiStub.should.have.been.calledOnce;
       apiStub.should.have.been.calledWith(
-        `/repos/${account}/${repository}/issues/comments/${commentId}`,
+        `/repos/${account}/${repository}/issues/${pullRequest}/comments`,
         account,
-        token,
-        updatedComment
+        token
       );
     });
 
@@ -53,22 +50,19 @@ describe('update', () => {
       const account = 'tools';
       const token = 'super-secure-token';
       const repository = 'github-comment-manager';
-      const commentId = 123456789;
-      const updatedComment = 'I am an updated comment';
-
-      sandbox.stub(githubApi, 'patch').rejects();
+      const pullRequest = 9000;
+      sandbox.stub(githubApi, 'get').rejects();
 
       // Exercise.
-      const updateAction = update.comment({
+      const readAction = read.comments({
         account,
         token,
         repository,
-        commentId,
-        updatedComment
+        pullRequest
       });
 
       // Verify.
-      return updateAction.should.have.rejected;
+      return readAction.should.have.rejected;
     });
   });
 });

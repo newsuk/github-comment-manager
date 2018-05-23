@@ -52,7 +52,8 @@
 			"src/**/*.js"
 		],
 		"exclude": [
-			"src/**/*.test.js"
+			"src/**/*.test.js",
+			"src/index.js"
 		],
 		"sourceMap": true,
 		"instrument": true,
