@@ -1,7 +1,7 @@
 {
 	"name": "github-comment-manager",
 	"version": "1.0.0",
-	"description": "Github commenting made eas",
+	"description": "Github commenting made easy",
 	"main": "lib/index.js",
 	"dependencies": {
 		"apollo-fetch": "^0.7.0",
