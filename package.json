@@ -4,7 +4,6 @@
 	"description": "Github commenting made easy",
 	"main": "lib/index.js",
 	"dependencies": {
-		"apollo-fetch": "^0.7.0",
 		"request": "^2.87.0"
 	},
 	"devDependencies": {
