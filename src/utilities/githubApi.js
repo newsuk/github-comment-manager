@@ -5,9 +5,9 @@ const baseUrl = 'https://api.github.com';
 
 const get = (path, account, token) =>
   new Promise((resolve, reject) => {
-    const requestPost = promisify(request.get);
+    const requestGet = promisify(request.get);
 
-    requestPost(buildOptions(path, account, token))
+    requestGet(buildOptions(path, account, token))
       .then(validateResponse)
       .then(resolve)
       .catch(reject);
@@ -35,9 +35,9 @@ const patch = (path, account, token, body) =>
 
 const remove = (path, account, token) =>
   new Promise((resolve, reject) => {
-    const requestRemove = promisify(request.delete);
+    const requestDelete = promisify(request.delete);
 
-    requestRemove(buildOptions(path, account, token))
+    requestDelete(buildOptions(path, account, token))
       .then(validateResponse)
       .then(resolve)
       .catch(reject);
