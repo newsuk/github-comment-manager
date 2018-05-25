@@ -1,4 +1,4 @@
-# Github Comment Manager
+# Github Comment Manager [![npm version](https://badge.fury.io/js/github-comment-manager.svg)](https://badge.fury.io/js/github-comment-manager)
 
 ## Overview
 
