@@ -81,4 +81,4 @@ remove.comment({account, token, repository, commentId});
 
 ### Contributing
 
-Please see the CONTRIBUTING.md for further details.
+Please see the [contribution document](CONTRIBUTING.MD) for further details.
