@@ -1,5 +1,7 @@
 # Github Comment Manager [![npm version](https://badge.fury.io/js/github-comment-manager.svg)](https://badge.fury.io/js/github-comment-manager)
 
+### Brought to you by The Times Tooling team  🛠
+
 ## Overview
 
 The Github Comment Manager makes interacting with Github comments easier.
