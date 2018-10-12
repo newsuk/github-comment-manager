@@ -47,7 +47,7 @@ const buildOptions = (path, account, token, body) => {
   let options = {
     url: `${baseUrl}${path}`,
     headers: {
-      Authorization: `Basic ${new Buffer(`${account}:${token}`).toString(
+      Authorization: `Basic ${Buffer.from(`${account}:${token}`).toString(
         'base64'
       )}`,
       'User-Agent': account
