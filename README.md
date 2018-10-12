@@ -14,16 +14,16 @@ The create function will create a single review comment on a Github pull request
 ```
 import { create } from 'github-comment-manager';
 
-create.comment({account, token, repository, pullRequest, comment});
+create.comment({token, repository, account, pullRequest, comment});
 ```
 
-| Parameter   | Description                               |
-| ----------- | ----------------------------------------- |
-| account     | Github account username                   |
-| token       | Github account access token               |
-| repository  | Repository to comment on                  |
-| pullRequest | Pull request number to add the comment to |
-| comment     | Comment text                              |
+| Parameter   | Description                                 |
+| ----------- | ------------------------------------------- |
+| token       | Github account access token                 |
+| repository  | Repository to comment on                    |
+| account     | Github account where the repository resides |
+| pullRequest | Pull request number to add the comment to   |
+| comment     | Comment text                                |
 
 #### Read
 
@@ -32,15 +32,15 @@ The read function will return a list of review comments on a pull request.
 ```
 import { read } from 'github-comment-manager';
 
-read.comments({account, token, repository, pullRequest});
+read.comments({token, repository, account, pullRequest});
 ```
 
-| Parameter   | Description                               |
-| ----------- | ----------------------------------------- |
-| account     | Github account username                   |
-| token       | Github account access token               |
-| repository  | Repository to retrieve comments from      |
-| pullRequest | Pull request number to read comments from |
+| Parameter   | Description                                 |
+| ----------- | ------------------------------------------- |
+| token       | Github account access token                 |
+| repository  | Repository to retrieve comments from        |
+| account     | Github account where the repository resides |
+| pullRequest | Pull request number to read comments from   |
 
 The example response can be found [HERE](https://developer.github.com/v3/issues/comments/#response).
 
@@ -51,16 +51,16 @@ The update function will update a specific review comment on a Github pull reque
 ```
 import { update } from 'github-comment-manager';
 
-update.comment({account, token, repository, commentId, updatedComment});
+update.comment({token, repository, account, commentId, updatedComment});
 ```
 
-| Parameter      | Description                               |
-| -------------- | ----------------------------------------- |
-| account        | Github account username                   |
-| token          | Github account access token               |
-| repository     | Repository to update comment on           |
-| commentId      | Id of the comment to be updated           |
-| updatedComment | Text which the comment will be updated to |
+| Parameter      | Description                                 |
+| -------------- | ------------------------------------------- |
+| token          | Github account access token                 |
+| repository     | Repository to update comment on             |
+| account        | Github account where the repository resides |
+| commentId      | Id of the comment to be updated             |
+| updatedComment | Text which the comment will be updated to   |
 
 #### Remove
 
@@ -69,15 +69,15 @@ The remove function will remove a specific review comment on a Github pull reque
 ```
 import { remove } from 'github-comment-manager';
 
-remove.comment({account, token, repository, commentId});
+remove.comment({token, repository, account, commentId});
 ```
 
-| Parameter  | Description                       |
-| ---------- | --------------------------------- |
-| account    | Github account username           |
-| token      | Github account access token       |
-| repository | Repository to remove comment from |
-| commentId  | Id of the comment to be removed   |
+| Parameter  | Description                                 |
+| ---------- | ------------------------------------------- |
+| token      | Github account access token                 |
+| repository | Repository to remove comment from           |
+| account    | Github account where the repository resides |
+| commentId  | Id of the comment to be removed             |
 
 ### Contributing
 
